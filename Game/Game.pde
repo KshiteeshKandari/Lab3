@@ -1,3 +1,5 @@
+import processing.serial.*;
+Serial myPort;
 //making a string for x values
 int[] stringX = {150,250,350,450};
 boolean[] bars = {false,false,false,false};
@@ -96,20 +98,64 @@ void game_draw(){
 
 
 // do it with key pressed for now
-void keyPressed(){
-  if (key == 'h'){bars[0] = true;}
-  if (key == 'j'){bars[1] = true;}
-  if (key == 'k'){bars[2] = true;}
-  if (key == 'l'){bars[3] = true;}
+//void keyPressed(){
+//  if (key == 'h'){bars[0] = true;}
+//  if (key == 'j'){bars[1] = true;}
+//  if (key == 'k'){bars[2] = true;}
+//  if (key == 'l'){bars[3] = true;}
+//}
+
+//void keyReleased(){
+//  if (key == 'h'){bars[0] = false;}
+//  if (key == 'j'){bars[1] = false;}
+//  if (key == 'k'){bars[2] = false;}
+//  if (key == 'l'){bars[3] = false;}
+//}
+
+// ----------------------------- using serial port input
+void serialEvent(Serial myPort) {
+  String tempVal = myPort.readStringUntil('\n');
+  if (tempVal != null) {
+    tempVal = trim(tempVal);
+    int direction = Integer.parseInt(tempVal);
+    switch (direction) {
+    case 5:  // yellow
+      if (bars[0] == false){
+        bars[0] = true;
+      }
+      else {
+      bars[0] = false;
+      }
+      break;
+    case 6:  // green
+      if (bars[1] == false){
+        bars[1] = true;
+      }
+      else {
+      bars[1] = false;
+      }
+      break;
+    case 7:  // red
+      if (bars[2] == false){
+        bars[2] = true;
+      }
+      else {
+      bars[2] = false;
+      }
+      break;
+    case 8:  // purple
+      if (bars[3] == false){
+        bars[3] = true;
+      }
+      else {
+      bars[3] = false;
+      }
+      break;
+    }
+  }
 }
 
-void keyReleased(){
-  if (key == 'h'){bars[0] = false;}
-  if (key == 'j'){bars[1] = false;}
-  if (key == 'k'){bars[2] = false;}
-  if (key == 'l'){bars[3] = false;}
-}
-
+//-------------------------------
 void resetBeat(int index){
    beats[index].x = stringX[floor(random(4))];
    beats[index].y -= 950;
