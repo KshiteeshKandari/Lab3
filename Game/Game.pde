@@ -14,6 +14,11 @@ boolean backButton = false;
 
 
 void game_setup(){
+  
+  String portName = Serial.list()[0];
+  myPort = new Serial(this, portName, 115200);
+  myPort.bufferUntil('\n');
+  
   rectMode(CENTER);
   
   barsY = height * 4/5;
