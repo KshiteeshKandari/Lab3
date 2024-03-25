@@ -7,7 +7,7 @@ int barsY;
 int numBeats = 9;
 PVector [] beats = new PVector[numBeats];
 
-int flow = 3;
+int flow = 6;
 int Score = 0;
 
 boolean backButton = false;
@@ -95,6 +95,34 @@ void game_draw(){
       }
     }
   }
+  
+//// checking if the bars hit the beat or not
+//for (int i = 0; i < beats.length; i++) {
+//    boolean beatHit = false; // Flag to check if the beat is hit
+//    boolean beatPassedBar = false; // Flag to check if the beat has passed the bar
+//    for (int j = 0; j < bars.length; j++) {
+//        if (bars[j] && stringX[j] == beats[i].x && beats[i].y > barsY - 30 && beats[i].y < barsY + 30) {
+//            resetBeat(i);
+//            Score += 1;
+//            beatHit = true; // Set the flag to true if beat is hit
+//            break; // Exit the loop since beat is hit
+//        }
+//        // Check if the beat has passed the bar and set the flag
+//        if (!beatPassedBar && beats[i].y >= barsY + 30) {
+//            beatPassedBar = true;
+//        }
+//    }
+//    // If the beat is not hit and it has passed the bar, decrement the score only once
+//    if (!beatHit && beatPassedBar) {
+//        Score -= 1;
+//    }
+//}
+
+
+
+
+
+
   fill(0);
   text(Score,500,500);
   
@@ -124,7 +152,7 @@ void serialEvent(Serial myPort) {
     tempVal = trim(tempVal);
     int direction = Integer.parseInt(tempVal);
     switch (direction) {
-    case 5:  // yellow
+    case 0:  // yellow
       if (bars[0] == false){
         bars[0] = true;
       }
@@ -132,7 +160,7 @@ void serialEvent(Serial myPort) {
       bars[0] = false;
       }
       break;
-    case 6:  // green
+    case 1:  // green
       if (bars[1] == false){
         bars[1] = true;
       }
@@ -140,7 +168,7 @@ void serialEvent(Serial myPort) {
       bars[1] = false;
       }
       break;
-    case 7:  // red
+    case 2:  // red
       if (bars[2] == false){
         bars[2] = true;
       }
@@ -148,7 +176,7 @@ void serialEvent(Serial myPort) {
       bars[2] = false;
       }
       break;
-    case 8:  // purple
+    case 3:  // purple
       if (bars[3] == false){
         bars[3] = true;
       }
